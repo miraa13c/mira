@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import type { ScreenId } from '../App';
 import { ArrowRight, CalendarHeart, Heart, Sparkles } from 'lucide-react';
 import { daysSince, daysUntil, pickDaily, useAppData } from '../../../lib/store';
-import { GhostButton, SoftButton } from '../ui';
+import { GhostButton, SoftButton } from '../../ui';
 
 export default function Home({ go }: { go: (id: ScreenId) => void }) {
   const data = useAppData();

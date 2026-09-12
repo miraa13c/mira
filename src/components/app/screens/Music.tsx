@@ -1,7 +1,7 @@
 import { ExternalLink, Music2, Pencil, Plus, Trash2, Check, X } from 'lucide-react';
 import { useState } from 'react';
 import { makeId, updateData, useAppData, type Track } from '../../../lib/store';
-import { Field, GhostButton, inputClass } from '../ui';
+import { Field, GhostButton, inputClass } from '../../ui';
 
 export default function Music() {
   const data = useAppData();

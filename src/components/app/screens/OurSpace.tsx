@@ -14,7 +14,7 @@ import {
   Compass,
 } from "lucide-react";
 import { formatDate, makeId, updateData, useAppData, type ImportantDate, type Photo } from "../../../lib/store";
-import { Field, GhostButton, IconAction, SectionHeading, StringListEditor, inputClass } from "../ui";
+import { Field, GhostButton, IconAction, SectionHeading, StringListEditor, inputClass } from "../../ui";
 
 export default function OurSpace() {
   const data = useAppData();

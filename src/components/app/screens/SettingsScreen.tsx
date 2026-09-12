@@ -1,6 +1,6 @@
 import { CheckCircle2, RotateCcw } from 'lucide-react';
 import { resetData, updateData, useAppData, type BackgroundId, type ThemeId } from '../../../lib/store';
-import { Field, GhostButton, inputClass } from '../ui';
+import { Field, GhostButton, inputClass } from '../../ui';
 
 export default function SettingsScreen() {
   const data = useAppData();

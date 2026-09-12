@@ -16,7 +16,12 @@ npm run build
 npm run preview
 ```
 
-Push to GitHub and connect the repo to Vercel or Cloudflare Pages — either will build and deploy this with zero extra config.
+Pushes to `main` deploy automatically to GitHub Pages via `.github/workflows/deploy.yml`.
+The site is published at <https://miraa13c.github.io/mira/>.
+
+To enable deployment, open the repository's **Settings → Pages** page and set **Source** to
+**GitHub Actions**. The workflow installs dependencies, builds the static Astro output, and
+publishes `dist/`.
 
 ## Important things to know before you deploy
 

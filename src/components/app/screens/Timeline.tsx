@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Pencil, Plus, Trash2 } from 'lucide-react';
 import { makeId, updateData, useAppData, type TimelineEntry } from '../../../lib/store';
-import { GhostButton, inputClass, Field } from '../ui';
+import { GhostButton, inputClass, Field } from '../../ui';
 
 export default function Timeline() {
   const data = useAppData();

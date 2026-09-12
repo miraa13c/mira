@@ -1,6 +1,6 @@
 import { Heart, Plus, Trash2 } from 'lucide-react';
 import { makeId, updateData, useAppData } from '../../../lib/store';
-import { GhostButton, inputClass } from '../ui';
+import { GhostButton, inputClass } from '../../ui';
 
 export default function LoveNotes() {
   const data = useAppData();
