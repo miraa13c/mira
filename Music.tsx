@@ -1,0 +1,17 @@
+import { ExternalLink, Music2, Pencil, Plus, Trash2, Check, X } from 'lucide-react';
+import { useState } from 'react';
+import { makeId, updateData, useAppData, type Track } from '../../../lib/store';
+import { Field, GhostButton, inputClass } from '../ui';
+
+export default function Music() {
+  const data = useAppData();
+  const [editing, setEditing] = useState<string | null>(null);
+  return <div className="space-y-8"><div><h1 className="font-display text-4xl font-semibold">Our Music</h1><p className="text-muted-foreground">the full soundtrack of us.</p></div>
+    <div className="space-y-3">{data.tracks.map(t => editing === t.id ? <TrackEditor key={t.id} track={t} onSave={x => { updateData(d => ({ ...d, tracks: d.tracks.map(y => y.id === t.id ? x : y) })); setEditing(null); }} onCancel={() => setEditing(null)} /> : <article key={t.id} className="flex gap-4 rounded-3xl border border-border bg-card p-4 shadow-sm"><div className="size-20 shrink-0 overflow-hidden rounded-2xl bg-accent">{t.coverUrl ? <img src={t.coverUrl} alt="" className="h-full w-full object-cover" /> : <div className="grid h-full place-items-center"><Music2 /></div>}</div><div className="min-w-0 flex-1"><div className="font-display text-xl font-semibold">{t.title}</div><div className="text-sm text-muted-foreground">{t.artist}</div><p className="mt-2 text-sm">{t.note}</p><a href={t.spotifyUrl} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-primary">Open Spotify <ExternalLink className="size-3" /></a></div><div className="flex items-start gap-1"><button type="button" onClick={() => setEditing(t.id)} className="rounded-xl p-2 text-muted-foreground hover:bg-accent"><Pencil className="size-4" /></button><button type="button" onClick={() => updateData(d => ({ ...d, tracks: d.tracks.filter(y => y.id !== t.id) }))} className="rounded-xl p-2 text-muted-foreground hover:text-destructive"><Trash2 className="size-4" /></button></div></article>)}</div>
+    <GhostButton onClick={() => updateData(d => ({ ...d, tracks: [...d.tracks, { id: makeId(), title: 'New song', artist: 'Artist', coverUrl: d.photos[0]?.url ?? '', spotifyUrl: 'https://open.spotify.com', note: 'why this one matters to us.' }] }))}><Plus className="size-4" />Add a song</GhostButton>
+  </div>;
+}
+function TrackEditor({ track, onSave, onCancel }: { track: Track; onSave: (x: Track) => void; onCancel: () => void }) {
+  const [x, setX] = useState(track);
+  return <div className="rounded-3xl border border-border bg-card p-5 shadow-sm"><div className="grid gap-3 sm:grid-cols-2"><Field label="Title"><input className={inputClass} value={x.title} onChange={e => setX({ ...x, title: e.target.value })} /></Field><Field label="Artist"><input className={inputClass} value={x.artist} onChange={e => setX({ ...x, artist: e.target.value })} /></Field><Field label="Cover URL"><input className={inputClass} value={x.coverUrl} onChange={e => setX({ ...x, coverUrl: e.target.value })} /></Field><Field label="Spotify URL"><input className={inputClass} value={x.spotifyUrl} onChange={e => setX({ ...x, spotifyUrl: e.target.value })} /></Field></div><Field label="Note"><textarea className={`${inputClass} mt-3 min-h-24`} value={x.note} onChange={e => setX({ ...x, note: e.target.value })} /></Field><div className="mt-4 flex gap-2"><GhostButton onClick={() => onSave(x)}><Check className="size-4" />Save</GhostButton><GhostButton onClick={onCancel}><X className="size-4" />Cancel</GhostButton></div></div>;
+}
